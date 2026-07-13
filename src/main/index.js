@@ -46,6 +46,9 @@ app.whenReady().then(() => {
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
   })
+  ipcMain.handle('fechar-app', () => {
+    app.quit()
+  })
 
   ipcMain.handle('selecionar-pasta', async () => {
     const resultado = await dialog.showOpenDialog({ properties: ['openDirectory'] })

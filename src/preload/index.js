@@ -8,8 +8,10 @@ const api = {
   carregarConfig: () => ipcRenderer.invoke('carregar-config'),
   carregarMods: () => ipcRenderer.invoke('carregar-mods'),
   salvarMods: (mods) => ipcRenderer.invoke('salvar-mods', mods),
-  excluirMod: (mod) => ipcRenderer.invoke('excluir-mod', mod)
+  excluirMod: (mod) => ipcRenderer.invoke('excluir-mod', mod),
+  fecharApp: () => ipcRenderer.invoke('fechar-app')
 }
+contextBridge.exposeInMainWorld('api', api)
 
 if (process.contextIsolated) {
   try {
