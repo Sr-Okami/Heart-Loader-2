@@ -46,8 +46,8 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-950 p-6">
-      <header>
+    <div className="h-screen flex flex-col bg-neutral-950">
+      <header className="shrink-0 p-6 pb-0">
         <h1 className="text-2xl font-bold text-amber-500 mb-4">Heart Loader 2</h1>
 
         <div className="flex justify-center gap-x-10 mb-4">
@@ -65,22 +65,27 @@ function App() {
           </button>
         </div>
       </header>
-
-      <div className="grid grid-cols-2 gap-4 pb-10">
-        {mods.map((mod) => (
-          <ModItem
-            key={mod.chave}
-            nome={mod.nome}
-            ativo={mod.ativo}
-            imagem={mod.imagem}
-            onToggle={() => toggleMod(mod.chave)}
-            onExcluir={() => excluirMod(mod)}
-          />
-        ))}
-      </div>
+      {/* Area do fica os mods para o usuário */}
+      <main className="flex-1 overflow-y-auto px-6 pb-4">
+        <div className="grid grid-cols-2 gap-4 pb-10">
+          {mods.map((mod) => (
+            <ModItem
+              key={mod.chave}
+              nome={mod.nome}
+              ativo={mod.ativo}
+              imagem={mod.imagem}
+              onToggle={() => toggleMod(mod.chave)}
+              onExcluir={() => excluirMod(mod)}
+            />
+          ))}
+        </div>
+      </main>
       <footer>
-        <p className="text-sm text-green-600 text-center">
+        <p className="text-2xl text-green-600 text-center">
           {salvo ? 'Mods salvos com sucesso!' : ''}
+        </p>
+        <p className="text-center text-neutral-700 hover:text-amber-600 cursor-pointer">
+          Versão: Beta.1
         </p>
       </footer>
     </div>

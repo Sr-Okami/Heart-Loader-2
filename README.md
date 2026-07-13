@@ -1,10 +1,13 @@
 # heart-loader-2
 
-An Electron application with React
+Aplicação Electron com React e Tailwind CSS.
+Um simples mod loader para Hearts of Iron IV, fiz para uso pessoal no linux, para não depender do launcher oficial da paradox.
 
-## Recommended IDE Setup
+## Conteúdo Usado:
 
-- [VSCode](https://code.visualstudio.com/) + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- React
+- Electron
+- Tailwind CSS
 
 ## Project Setup
 
