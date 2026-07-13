@@ -34,19 +34,46 @@ function App() {
     const chavesAtivas = mods.filter((mod) => mod.ativo).map((mod) => mod.chave)
     window.api.salvarMods(chavesAtivas)
   }
+  const excluirMod = async (mod) => {
+    const confirmou = confirm(`Excluir o mod "${mod.nome}"? Essa ação não pode ser desfeita.`)
+    if (!confirmou) return
+
+    await window.api.excluirMod(mod)
+    setMods(mods.filter((m) => m.chave !== mod.chave))
+  }
 
   return (
-    <>
-      <button onClick={salvarMods}>Salvar</button>
-      {mods.map((mod) => (
-        <ModItem
-          key={mod.chave}
-          nome={mod.nome}
-          ativo={mod.ativo}
-          onToggle={() => toggleMod(mod.chave)}
-        />
-      ))}
-    </>
+    <div className="min-h-screen bg-neutral-950 p-6">
+      <h1 className="text-2xl font-bold text-amber-500 mb-4">Heart Loader 2</h1>
+
+      <div className="flex justify-center gap-x-10 mb-4">
+        <button
+          onClick={salvarMods}
+          className="mb-4 px-4 py-2 rounded-lg bg-amber-600 text-neutral-950 font-semibold hover:bg-amber-500 transition-colors cursor-pointer"
+        >
+          Salvar
+        </button>
+        <button
+          onClick={() => setTela('config')}
+          className="mb-4 px-4 py-2 rounded-lg bg-amber-600 text-neutral-950 font-semibold hover:bg-amber-500 transition-colors cursor-pointer"
+        >
+          Configurações
+        </button>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4 pb-10">
+        {mods.map((mod) => (
+          <ModItem
+            key={mod.chave}
+            nome={mod.nome}
+            ativo={mod.ativo}
+            imagem={mod.imagem}
+            onToggle={() => toggleMod(mod.chave)}
+            onExcluir={() => excluirMod(mod)}
+          />
+        ))}
+      </div>
+    </div>
   )
 }
 

@@ -1,7 +1,7 @@
 import { app, shell, BrowserWindow, ipcMain, dialog } from 'electron'
 import { join, extname } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import { readFileSync, writeFileSync, existsSync, readdirSync, copyFileSync, rmSync } from 'fs'
+import { readFileSync, writeFileSync, existsSync, readdirSync, copyFileSync } from 'fs'
 import icon from '../../resources/icon.png?asset'
 
 const arquivoConfig = join(app.getPath('userData'), 'config.json')
@@ -98,7 +98,12 @@ app.whenReady().then(() => {
         const imgEncontrada = arquivosPasta.find((f) =>
           extensoes.includes(extname(f).toLowerCase())
         )
-        if (imgEncontrada) imagem = join(pastaMod, imgEncontrada)
+        if (imgEncontrada) {
+          const caminhoImagem = join(pastaMod, imgEncontrada)
+          const bytes = readFileSync(caminhoImagem)
+          const extensao = extname(imgEncontrada).slice(1)
+          imagem = `data:image/${extensao};base64,${bytes.toString('base64')}`
+        }
       }
 
       return {
