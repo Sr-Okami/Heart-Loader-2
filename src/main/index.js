@@ -111,7 +111,7 @@ app.whenReady().then(() => {
         chave,
         nome: nomeMatch ? nomeMatch[1] : nomePasta,
         versao: VersaoMatch ? VersaoMatch[1] : '?',
-        ativos: ativos.includes(chave),
+        ativo: ativos.includes(chave),
         imagem
       }
     })

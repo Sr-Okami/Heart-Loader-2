@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 function Config({ onSalvar }) {
   const [pastaMods, setPastaMods] = useState('')
   const [arquivoJson, setArquivoJson] = useState('')
+  const [salvo, setSalvo] = useState(false)
 
   useEffect(() => {
     window.api.carregarConfig().then((config) => {
@@ -23,6 +24,8 @@ function Config({ onSalvar }) {
 
   const salvar = async () => {
     await window.api.salvarCaminhos({ mods: pastaMods, json: arquivoJson })
+    setSalvo(true)
+    setTimeout(() => setSalvo(false), 3000)
     onSalvar()
   }
 
@@ -41,7 +44,7 @@ function Config({ onSalvar }) {
           />
           <button
             onClick={escolherPastaMods}
-            className="px-4 py-2 rounded-lg bg-amber-600 text-neutral-950 font-semibold hover:bg-amber-500 transition-colors cursor-pointer"
+            className="px-4 py-2 rounded-lg bg-amber-600 text-neutral-950 font-semibold hover:bg-amber-500 transition-colors cursor-pointer active:bg-amber-700 active:scale-95"
           >
             Selecionar pasta
           </button>
@@ -57,7 +60,7 @@ function Config({ onSalvar }) {
           />
           <button
             onClick={escolherArquivoJson}
-            className="px-4 py-2 rounded-lg bg-amber-600 text-neutral-950 font-semibold hover:bg-amber-500 transition-colors cursor-pointer"
+            className="px-4 py-2 rounded-lg bg-amber-600 text-neutral-950 font-semibold hover:bg-amber-500 transition-colors cursor-pointer active:bg-amber-700 active:scale-95"
           >
             Selecionar arquivo
           </button>
@@ -65,10 +68,13 @@ function Config({ onSalvar }) {
 
         <button
           onClick={salvar}
-          className="px-4 py-2 rounded-lg bg-amber-600 text-neutral-950 font-semibold hover:bg-amber-500 transition-colors mt-2 cursor-pointer"
+          className="px-4 py-2 rounded-lg bg-amber-600 text-neutral-950 font-semibold hover:bg-amber-500 transition-colors mt-2 cursor-pointer active:bg-amber-700 active:scale-95"
         >
           Salvar
         </button>
+        {salvo && (
+          <p className="text-sm text-green-600 text-center">Configurações salvas com sucesso!</p>
+        )}
       </div>
     </div>
   )

@@ -5,6 +5,7 @@ import ModItem from './components/ModItem'
 function App() {
   const [tela, setTela] = useState('carregando')
   const [mods, setMods] = useState([])
+  const [salvo, setSalvo] = useState(false)
 
   useEffect(() => {
     window.api.carregarConfig().then((config) => {
@@ -33,6 +34,8 @@ function App() {
   const salvarMods = () => {
     const chavesAtivas = mods.filter((mod) => mod.ativo).map((mod) => mod.chave)
     window.api.salvarMods(chavesAtivas)
+    setSalvo(true)
+    setTimeout(() => setSalvo(false), 3000)
   }
   const excluirMod = async (mod) => {
     const confirmou = confirm(`Excluir o mod "${mod.nome}"? Essa ação não pode ser desfeita.`)
@@ -44,22 +47,24 @@ function App() {
 
   return (
     <div className="min-h-screen bg-neutral-950 p-6">
-      <h1 className="text-2xl font-bold text-amber-500 mb-4">Heart Loader 2</h1>
+      <header>
+        <h1 className="text-2xl font-bold text-amber-500 mb-4">Heart Loader 2</h1>
 
-      <div className="flex justify-center gap-x-10 mb-4">
-        <button
-          onClick={salvarMods}
-          className="mb-4 px-4 py-2 rounded-lg bg-amber-600 text-neutral-950 font-semibold hover:bg-amber-500 transition-colors cursor-pointer"
-        >
-          Salvar
-        </button>
-        <button
-          onClick={() => setTela('config')}
-          className="mb-4 px-4 py-2 rounded-lg bg-amber-600 text-neutral-950 font-semibold hover:bg-amber-500 transition-colors cursor-pointer"
-        >
-          Configurações
-        </button>
-      </div>
+        <div className="flex justify-center gap-x-10 mb-4">
+          <button
+            onClick={salvarMods}
+            className="mb-4 px-4 py-2 rounded-lg bg-amber-600 text-neutral-950 font-semibold hover:bg-amber-500 transition-colors cursor-pointer active:bg-amber-700 active:scale-95"
+          >
+            Salvar
+          </button>
+          <button
+            onClick={() => setTela('config')}
+            className="mb-4 px-4 py-2 rounded-lg bg-amber-600 text-neutral-950 font-semibold hover:bg-amber-500 transition-colors cursor-pointer active:bg-amber-700 active:scale-95"
+          >
+            Configurações
+          </button>
+        </div>
+      </header>
 
       <div className="grid grid-cols-2 gap-4 pb-10">
         {mods.map((mod) => (
@@ -73,6 +78,11 @@ function App() {
           />
         ))}
       </div>
+      <footer>
+        <p className="text-sm text-green-600 text-center">
+          {salvo ? 'Mods salvos com sucesso!' : ''}
+        </p>
+      </footer>
     </div>
   )
 }
