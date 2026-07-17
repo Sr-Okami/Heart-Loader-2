@@ -66,6 +66,10 @@ app.whenReady().then(() => {
   ipcMain.handle('salvar-caminhos', (event, caminhos) => {
     writeFileSync(arquivoConfig, JSON.stringify(caminhos, null, 2))
   })
+  ipcMain.handle('abrir-pasta-mods', () => {
+    const config = carregarConfig()
+    if (config.mods) shell.openPath(config.mods)
+  })
 
   ipcMain.handle('carregar-config', () => carregarConfig())
 

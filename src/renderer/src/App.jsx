@@ -95,6 +95,21 @@ function App() {
           </svg>
           <span>Config</span>
         </button>
+        {/* Botão abrir pasta Mods */}
+        <button
+          onClick={() => window.api.abrirPastaMods()}
+          className="w-12 h-12 rounded-lg bg-neutral-800 text-neutral-300 hover:bg-neutral-700 transition-colors cursor-pointer active:scale-95 flex flex-col items-center justify-center text-xs gap-1 group relative"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-19.5 0v6a2.25 2.25 0 002.25 2.25h15a2.25 2.25 0 002.25-2.25v-6m-19.5 0h19.5M6 6h4.5l2.25 2.25H18a2.25 2.25 0 012.25 2.25v.75"
+            />
+          </svg>
+          <span>Pasta</span>
+        </button>
 
         {/* Botão Fechar */}
         <button

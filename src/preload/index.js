@@ -9,9 +9,9 @@ const api = {
   carregarMods: () => ipcRenderer.invoke('carregar-mods'),
   salvarMods: (mods) => ipcRenderer.invoke('salvar-mods', mods),
   excluirMod: (mod) => ipcRenderer.invoke('excluir-mod', mod),
-  fecharApp: () => ipcRenderer.invoke('fechar-app')
+  fecharApp: () => ipcRenderer.invoke('fechar-app'),
+  abrirPastaMods: () => ipcRenderer.invoke('abrir-pasta-mods')
 }
-contextBridge.exposeInMainWorld('api', api)
 
 if (process.contextIsolated) {
   try {
